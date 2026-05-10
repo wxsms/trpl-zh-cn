@@ -47,6 +47,8 @@ Yellow: 50
 Blue: 10
 ```
 
+<a id="hash-maps-and-ownership"></a>
+
 ### 在哈希 map 中管理所有权
 
 对于像 `i32` 这样的实现了 `Copy` trait 的类型，其值可以拷贝进哈希 map。对于像 `String` 这样拥有所有权的值，其值将被移动而哈希 map 会成为这些值的所有者，如示例 8-22 所示：
@@ -78,6 +80,8 @@ Blue: 10
 <span class="caption">示例 8-23：替换以特定键储存的值</span>
 
 这会打印出 `{"Blue": 25}`。原始的值 `10` 则被覆盖了。
+
+<a id="only-inserting-a-value-if-the-key-has-no-value"></a>
 
 #### 只在键尚不存在时插入键值对
 

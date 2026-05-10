@@ -92,6 +92,8 @@ enum Result<T, E> {
 >
 > 虽然这段代码有着如示例 9-5 一样的行为，但并没有包含任何 `match` 表达式且更容易阅读。在阅读完第十三章后再回到这个例子，并查看标准库文档 `unwrap_or_else` 方法都做了什么操作。在处理错误时，还有很多这类方法可以消除大量嵌套的 `match` 表达式。
 
+<a id="shortcuts-for-panic-on-error-unwrap-and-expect"></a>
+
 #### 失败时 panic 的快捷方式
 
 `match` 能够胜任它的工作，不过它可能有点冗长并且不总是能很好的表明其意图。`Result<T, E>` 类型定义了很多辅助方法来处理各种更为特定的任务。`unwrap` 方法是一个快捷方式，其内部实现与我们在 Listing 9-4 中编写的 `match` 表达式相同。如果 `Result` 值是变体 `Ok`，`unwrap` 会返回 `Ok` 中的值。如果 `Result` 是变体 `Err`，`unwrap` 会为我们调用 `panic!`。这里是一个实践 `unwrap` 的例子：
@@ -153,6 +155,8 @@ hello.txt should be included in this project: Os { code: 2, kind: NotFound, mess
 
 这种传播错误的模式在 Rust 中太常见了，因此 Rust 提供了问号运算符 `?` 来简化这一过程。
 
+<a id="a-shortcut-for-propagating-errors-the--operator"></a>
+
 #### `?` 运算符快捷方式
 
 示例 9-7 展示了一个 `read_username_from_file` 的实现，它实现了与示例 9-6 中的代码相同的功能，不过这个实现使用了 `?` 运算符：
@@ -196,6 +200,8 @@ hello.txt should be included in this project: Os { code: 2, kind: NotFound, mess
 <span class="caption">示例 9-9: 使用 `fs::read_to_string` 而不是打开后读取文件</span>
 
 将文件读取到一个字符串是相当常见的操作，所以标准库提供了名为 `fs::read_to_string` 的函数，它会打开文件、新建一个 `String`、读取文件的内容，并将内容放入 `String`，接着返回它。当然，这样做就没有展示所有这些错误处理的机会了，所以我们最初就选择了艰苦的道路。
+
+<a id="where-the--operator-can-be-used"></a>
 
 ### 哪里可以使用 `?` 运算符
 

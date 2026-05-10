@@ -166,6 +166,8 @@ again!
 
 如果你在循环内部使用 `return`，也可以从中返回。不过，`break` 只会退出当前循环，而 `return` 总是会退出当前函数。
 
+<a id="loop-labels-to-disambiguate-between-multiple-loops"></a>
+
 #### 循环标签：在多个循环之间消除歧义
 
 如果循环中又套了循环，那么 `break` 和 `continue` 默认只作用于当前最内层的那个循环。你可以选择给某个循环加上一个 **循环标签**（*loop label*），然后把这个标签和 `break` 或 `continue` 一起使用，这样这些关键字就会作用于被标记的循环，而不是最内层循环。下面是一个包含两层嵌套循环的例子：
@@ -179,6 +181,8 @@ again!
 ```console
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-32-5-loop-labels/output.txt}}
 ```
+
+<a id="conditional-loops-with-while"></a>
 
 #### `while` 条件循环
 

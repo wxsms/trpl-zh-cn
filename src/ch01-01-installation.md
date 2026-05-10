@@ -92,12 +92,15 @@ $ rustup update
 $ rustup self uninstall
 ```
 
+<a id="local-documentation"></a>
+
 ### 本地文档
 
 安装 Rust 时也会附带一份文档的本地副本，供你离线阅读。运行 `rustup doc` 即可在浏览器中打开本地文档。
 
 任何时候，如果标准库提供了某个类型或函数，而你不确定它是做什么的或该如何使用，请查阅应用程序接口（application programming interface，API）文档！
 
+<a id="text-editors-and-integrated-development-environments"></a>
 
 ### 文本编辑器和集成开发环境（Integrated Development Environments, IDE）
 

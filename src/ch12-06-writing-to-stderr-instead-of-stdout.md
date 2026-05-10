@@ -1,3 +1,5 @@
+<a id="writing-error-messages-to-standard-error-instead-of-standard-output"></a>
+
 ## 将错误重定向到标准错误
 
 [ch12-06-writing-to-stderr-instead-of-stdout.md](https://github.com/rust-lang/book/blob/d7c0e477a22bcb37fdb290c6046058565d6738c2/src/ch12-06-writing-to-stderr-instead-of-stdout.md)

@@ -62,6 +62,8 @@
 
 由于我们获取了 `args` 的所有权，并且将通过迭代来修改 `args`，因此我们可以在 `args` 参数的声明中添加 `mut` 关键字，使其可变。
 
+<a id="using-iterator-trait-methods-instead-of-indexing"></a>
+
 #### 使用 `Iterator` trait 方法
 
 接下来，我们将修改 `Config::build` 的函数体。因为 `args` 实现了 `Iterator` trait，因此我们知道可以对其调用 `next` 方法！示例 13-20 更新了示例 12-23 中的代码，以使用 `next` 方法：
@@ -75,6 +77,8 @@
 <span class="caption">示例 13-20：修改 `Config::build` 的函数体来使用迭代器方法</span>
 
 请记住 `env::args` 返回值的第一个值是程序的名称。我们希望忽略它并获取下一个值，所以首先调用 `next` 且不对其返回值做任何操作。然后，我们再次调用 `next` 来获取要放入 `Config` 结构体的 `query` 字段的值。如果 `next` 返回 `Some`，使用 `match` 来提取其值。如果它返回 `None`，则意味着没有提供足够的参数并通过 `Err` 值提早返回。我们对 `file_path` 的值也进行同样的操作。
+
+<a id="making-code-clearer-with-iterator-adapters"></a>
 
 ### 使用迭代器适配器简化代码
 
@@ -99,6 +103,8 @@ I/O 项目中其他可以利用迭代器的地方是 `search` 函数，示例 13
 <span class="caption">示例 13-22：在 `search` 函数实现中使用迭代器适配器</span>
 
 回忆一下，`search` 函数的目的是返回所有 `contents` 中包含 `query` 的行。类似于示例 13-16 中的 `filter` 例子，这段代码使用 `filter` 适配器来保留 `line.contains(query)` 返回 `true` 的行。接着使用 `collect` 将匹配行收集到另一个 vector 中。这样就容易多了！尝试对 `search_case_insensitive` 函数做出同样的使用迭代器方法的修改吧。
+
+<a id="choosing-between-loops-or-iterators"></a>
 
 ### 在循环和迭代器之间选择
 

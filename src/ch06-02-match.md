@@ -1,3 +1,5 @@
+<a id="the-match-control-flow-operator"></a>
+
 ## `match` 控制流结构
 
 [ch06-02-match.md](https://github.com/rust-lang/book/blob/602a0d2e898f5e4ff030eac0b457755a10e0be1e/src/ch06-02-match.md)
@@ -49,6 +51,8 @@ Rust 有一个叫做 `match` 的极为强大的控制流运算符，它允许我
 ```
 
 如果调用 `value_in_cents(Coin::Quarter(UsState::Alaska))`，`coin` 将是 `Coin::Quarter(UsState::Alaska)`。当将值与每个分支相比较时，没有分支会匹配，直到遇到 `Coin::Quarter(state)`。这时，`state` 绑定的将会是值 `UsState::Alaska`。接着就可以在 `println!` 表达式中使用这个绑定了，像这样就可以获取 `Coin` 枚举的 `Quarter` 变体中内部的州的值。
+
+<a id="matching-with-optiont"></a>
 
 ### 匹配 `Option<T>`
 

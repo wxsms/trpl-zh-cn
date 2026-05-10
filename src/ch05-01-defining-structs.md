@@ -48,6 +48,8 @@
 
 为函数参数使用与结构体字段相同的名字是很合理的，但不得不重复写 `email` 和 `username` 这些字段名和变量名，多少有些啰嗦。如果结构体有更多字段，重复每个名称就更烦人了。幸运的是，有一种方便的简写语法！
 
+<a id="using-the-field-init-shorthand-when-variables-and-fields-have-the-same-name"></a>
+
 ### 使用字段初始化简写语法
 
 因为示例 5-4 中的参数名与字段名都完全相同，我们可以使用 **字段初始化简写语法**（*field init shorthand*）来重写 `build_user`，这样其行为与之前完全相同，不过无需重复 `username` 和 `email` 了，如示例 5-5 所示。
@@ -61,6 +63,8 @@
 <span class="caption">示例 5-5：`build_user` 函数使用了字段初始化简写语法，因为 `username` 和 `email` 参数与结构体字段同名</span>
 
 这里我们创建了一个新的 `User` 结构体实例，它有一个叫做 `email` 的字段。我们想要将 `email` 字段的值设置为 `build_user` 函数 `email` 参数的值。因为 `email` 字段与 `email` 参数有着相同的名称，则只需编写 `email` 而不是 `email: email`。
+
+<a id="creating-instances-from-other-instances-with-struct-update-syntax"></a>
 
 ### 使用结构体更新语法创建实例
 
@@ -90,6 +94,8 @@
 
 请注意，结构更新语法就像带有 `=` 的赋值，因为它移动了数据，就像我们在[“使用移动的变量与数据交互”][move]部分讲到的一样。在这个例子中，总体上说我们在创建 `user2` 后就不能再使用 `user1` 了，因为 `user1` 的 `username` 字段中的 `String` 被移到 `user2` 中。如果我们给 `user2` 的 `email` 和 `username` 都赋予新的 `String` 值，从而只复用 `user1` 的 `active` 和 `sign_in_count` 值，那么 `user1` 在创建 `user2` 后仍然有效。`active` 和 `sign_in_count` 的类型是实现 `Copy` trait 的类型，所以我们在[“只在栈上的数据：拷贝”][copy] 部分讨论的行为同样适用。在本例中我们也可以继续使用 `user1.email`，因为它的值并未从 `user1` 中移动出去。
 
+<a id="using-tuple-structs-without-named-fields-to-create-different-types"></a>
+
 ### 使用元组结构体创建不同的类型
 
 也可以定义与元组类似的结构体，称为 **元组结构体**（*tuple structs*）。元组结构体有着结构体名称提供的含义，但没有具体的字段名，只有字段的类型。当你想给整个元组取一个名字，并使元组成为与其他元组不同的类型时，元组结构体是很有用的，这时像常规结构体那样为每个字段命名就显得多余和形式化了。
@@ -103,6 +109,8 @@
 ```
 
 注意 `black` 和 `origin` 值的类型不同，因为它们是不同的元组结构体的实例。你定义的每一个结构体有其自己的类型，即使结构体中的字段可能有着相同的类型。例如，一个获取 `Color` 类型参数的函数不能接受 `Point` 作为参数，即便这两个类型都由三个 `i32` 值组成。除此之外，元组结构体实例类似于元组，你可以将它们解构为单独的部分，也可以使用 `.` 后跟索引来访问单独的值。与元组不同的是，解构元组结构体时必须写明结构体的类型。例如，我们可以写 `let Point(x, y, z) = origin;`，将 `origin` 的值解构到名为 `x`、`y` 和 `z` 的变量中。
+
+<a id="unit-like-structs-without-any-fields"></a>
 
 ### 定义类单元结构体
 

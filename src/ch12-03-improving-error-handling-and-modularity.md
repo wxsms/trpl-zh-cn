@@ -12,6 +12,8 @@
 
 让我们通过重构项目来解决这四个问题。
 
+<a id="separation-of-concerns-for-binary-projects"></a>
+
 ### 二进制项目的关注分离
 
 `main` 函数负责多个任务的组织问题在许多二进制项目中很常见。所以 Rust 社区开发出一类在 `main` 函数开始变得庞大时进行二进制程序的关注分离的指南。这些过程包括如下步骤：
@@ -121,6 +123,8 @@
 
 这个输出就更好了：现在有了一个合理的错误信息。然而，还是有一堆额外的信息我们不希望提供给用户。所以在这里使用示例 9-13 中的技术可能不是最好的；正如[第九章][ch9-error-guidelines]所讲到的一样，`panic!` 的调用更趋向于程序上的问题而不是使用上的问题。相反我们可以使用第九章学习的另一个技术 —— 返回一个可以表明成功或错误的 [`Result`][ch9-result]。
 
+<a id="returning-a-result-from-new-instead-of-calling-panic"></a>
+
 #### 返回 `Result` 而不是调用 `panic!`
 
 我们可以选择返回一个 `Result` 值，它在成功时会包含一个 `Config` 的实例，而在错误时会描述问题。我们还将把函数名从 `new` 改为 `build`，因为许多程序员希望 `new` 函数永远不会失败。当 `Config::build` 与 `main` 交流时，可以使用 `Result` 类型来表明这里存在问题。接着修改 `main` 将 `Err` 成员转换为对用户更友好的错误，而不是 `panic!` 调用产生的关于 `thread 'main'` 和 `RUST_BACKTRACE` 的文本。
@@ -140,6 +144,8 @@
 `build` 函数体中有两处修改：当没有足够参数时不再调用 `panic!`，而是返回 `Err` 值。同时我们将 `Config` 返回值包装进 `Ok` 成员中。这些修改使得函数符合其新的类型签名。
 
 通过让 `Config::build` 返回一个 `Err` 值，这就允许 `main` 函数处理 `build` 函数返回的 `Result` 值并在出现错误的情况下更明确地结束进程。
+
+<a id="calling-confignew-and-handling-errors"></a>
 
 #### 调用 `Config::build` 并处理错误
 
@@ -163,6 +169,8 @@
 
 非常好！现在输出对于用户来说就友好多了。
 
+<a id="extracting-logic-from-the-main-function"></a>
+
 ### 从 `main` 提取逻辑
 
 现在我们完成了配置解析的重构，让我们转向程序的逻辑。正如[“二进制项目的关注分离”](#二进制项目的关注分离)部分所展开的讨论，我们将提取一个叫做 `run` 的函数来存放目前 `main` 函数中不属于设置配置或处理错误的所有逻辑。一旦完成这些，`main` 函数将简明得足以通过观察来验证，而我们将能够为所有其他逻辑编写测试。
@@ -178,6 +186,8 @@
 <span class="caption">示例 12-11：提取 `run` 函数来包含剩余的程序逻辑</span>
 
 现在 `run` 函数包含了 `main` 中从读取文件开始的剩余的所有逻辑。`run` 函数获取一个 `Config` 实例作为参数。
+
+<a id="returning-errors-from-the-run-function"></a>
 
 #### 从 `run` 函数返回错误
 

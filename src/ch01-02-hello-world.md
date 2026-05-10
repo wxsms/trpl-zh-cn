@@ -6,6 +6,8 @@
 
 > 注意：本书假设你熟悉基本的命令行操作。Rust 对于你的编辑器、工具，以及代码位于何处并没有特定的要求，如果你更倾向于使用集成开发环境（IDE），而不是命令行，请尽管使用你喜欢的 IDE。目前很多 IDE 都在一定程度上支持 Rust；查看 IDE 文档以了解更多细节。Rust 团队一直致力于借助 `rust-analyzer` 提供强大的 IDE 支持。详见[附录 D][devtools]<!-- ignore -->。
 
+<a id="creating-a-project-directory"></a>
+
 ### 创建项目目录
 
 首先创建一个存放 Rust 代码的目录。Rust 并不关心代码存放在哪里，不过对于本书中的练习和项目，我们建议你在 home 目录中创建一个 *projects* 目录，并将所有项目都放在那里。
@@ -29,6 +31,8 @@ $ cd hello_world
 > mkdir hello_world
 > cd hello_world
 ```
+
+<a id="writing-and-running-a-rust-program"></a>
 
 ### Rust 程序基础
 
@@ -71,6 +75,8 @@ Hello, world!
 
 如果 `Hello, world!` 确实打印出来了，恭喜你！你已经正式写出了一个 Rust 程序。现在你已经是一名 Rust 程序员了，欢迎加入！
 
+<a id="anatomy-of-a-rust-program"></a>
+
 ### Rust 程序的结构
 
 现在，让我们回过头来仔细看看这个 “Hello, world!” 程序。这是第一块拼图：
@@ -100,6 +106,8 @@ println!("Hello, world!");
 第二，`"Hello, world!"` 是一个字符串。我们把这个字符串作为一个参数传递给 `println!`，字符串将被打印到屏幕上。
 
 第三，该行以分号结尾（`;`），这代表一个表达式的结束和下一个表达式可以开始。大部分 Rust 代码行以分号结尾。
+
+<a id="compiling-and-running-are-separate-steps"></a>
 
 ### 编译与运行
 

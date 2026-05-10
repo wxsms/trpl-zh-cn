@@ -132,6 +132,8 @@ use std::collections::HashMap;
 
 这是一个以标准库 crate 名 `std` 开头的绝对路径。
 
+<a id="using-nested-paths-to-clean-up-large-use-lists"></a>
+
 ### 使用嵌套路径来清理大量的 `use` 列表
 
 当需要引入很多定义于相同包或相同模块的项时，为每一项单独列出一行会占用源码大量的垂直空间。例如猜猜看章节示例 2-4 中有两行 `use` 语句都从 `std` 引入项到作用域：
@@ -175,6 +177,8 @@ use std::collections::HashMap;
 <span class="caption">示例 7-20: 将示例 7-19 中部分重复的路径合并为一个 `use` 语句</span>
 
 这一行便将 `std::io` 和 `std::io::Write` 同时引入作用域。
+
+<a id="the-glob-operator"></a>
 
 ### 通过 glob 运算符导入项
 

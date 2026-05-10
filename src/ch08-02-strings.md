@@ -6,6 +6,8 @@
 
 在集合章节中讨论字符串的原因是，字符串就是作为字节的集合外加一些方法实现的，当这些字节被解释为文本时，这些方法提供了实用的功能。在本小节中，我们会讲到 `String` 中那些任何集合类型都有的操作，比如创建、更新和读取。也会讨论 `String` 与其他集合不一样的地方，例如索引 `String` 是很复杂的，由于人和计算机理解 `String` 数据方式的不同。
 
+<a id="what-is-a-string"></a>
+
 ### 定义字符串
 
 我们先定义一下**字符串**这一术语的具体意义。Rust 的核心语言中只有一种字符串类型，字符串 slice `str`，它通常以被借用的形式出现，`&str`。第四章讲到了**字符串 slices**：它们是一些对储存在别处的 UTF-8 编码字符串数据的引用。举例来说，由于字符串字面值被储存在程序的二进制输出中，因此它们也是字符串 slices。
@@ -56,6 +58,8 @@
 
 `String` 的大小可以增加，其内容也可以改变，就像可以放入更多数据来改变 `Vec` 的内容一样。另外，可以方便的使用 `+` 运算符或 `format!` 宏来拼接 `String` 值。
 
+<a id="appending-to-a-string-with-push_str-and-push"></a>
+
 #### 使用 `push_str` 和 `push` 追加字符串
 
 可以通过 `push_str` 方法来附加字符串 slice，从而使 `String` 变长，如示例 8-15 所示。
@@ -85,6 +89,8 @@
 <span class="caption">示例 8-17：使用 `push` 将一个字符加入 `String` 值中</span>
 
 执行这些代码之后，`s` 将会包含 `lol`。
+
+<a id="concatenation-with-the--operator-or-the-format-macro"></a>
 
 #### 使用 `+` 运算符或 `format!` 宏拼接字符串
 
@@ -167,6 +173,8 @@ let answer = &hello[0];
 
 为了避免返回意外的值并造成不能立刻发现的 bug，Rust 根本不会编译这些代码，并在开发过程中及早杜绝了误会的发生。
 
+<a id="bytes-and-scalar-values-and-grapheme-clusters-oh-my"></a>
+
 #### 字节、标量值和字形簇
 
 这引起了关于 UTF-8 的另外一个问题：从 Rust 的角度来讲，事实上有三种相关方式可以查看字符串：字节、标量值和字形簇（最接近人们眼中 **字母**（*letters*）的概念）。
@@ -214,6 +222,8 @@ let s = &hello[0..4];
 
 在使用 range 来创建字符串 slice 时要格外小心，因为这么做可能会使你的程序崩溃。
 
+<a id="methods-for-iterating-over-strings"></a>
+
 ### 遍历字符串
 
 操作字符串每一部分的最好的方法是明确表示需要字符还是字节。对于单独的 Unicode 标量值使用 `chars` 方法。对 “Зд” 调用 `chars` 方法会将其分开并返回两个 `char` 类型的值，接着就可以遍历其结果来访问每一个元素了：
@@ -251,6 +261,8 @@ for b in "Зд".bytes() {
 不过请务必记住有效的 Unicode 标量值可能会由不止一个字节组成。
 
 从字符串中获取如同天城文这样的字形簇是很复杂的，所以标准库并没有提供这个功能。[crates.io](https://crates.io/)<!-- ignore --> 上有些提供这样功能的 crate。
+
+<a id="strings-are-not-so-simple"></a>
 
 ### 处理字符串的复杂性
 

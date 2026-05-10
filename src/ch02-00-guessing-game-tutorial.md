@@ -128,6 +128,8 @@ let mut bananas = 5; // 可变
 
 `&` 表示这个参数是一个 **引用**（_reference_），它允许多处代码访问同一处数据，而无需在内存中多次拷贝。引用是一个复杂的特性，Rust 的一个主要优势就是安全而简单的操纵引用。完成当前程序并不需要了解如此多细节。现在，我们只需知道它像变量一样，默认是不可变的。因此，需要写成 `&mut guess` 来使其可变，而不是 `&guess`。（第四章会更全面地讲解引用。）
 
+<a id="handling-potential-failure-with-the-result-type"></a>
+
 ### 使用 `Result` 类型来处理潜在的错误
 
 我们还没有完全分析完这行代码。虽然我们已经讲到了第三行文本，但要注意：它仍然属于同一条逻辑代码。接下来的部分是这个方法（method）：
@@ -202,6 +204,8 @@ You guessed: 6
 
 接下来，需要生成一个秘密数字，好让用户来猜。秘密数字应该每次都不同，这样重复玩才不会乏味；范围应该在 1 到 100 之间，这样才不会太困难。Rust 标准库中尚未包含随机数功能。然而，Rust 团队还是提供了一个包含上述功能的 [`rand` crate][randcrate]。
 
+<a id="using-a-crate-to-get-more-functionality"></a>
+
 ### 使用 crate 来增加更多功能
 
 记住，crate 是一组 Rust 源代码文件。我们正在构建的项目是一个 *二进制 crate*，它会生成一个可执行文件。`rand` crate 则是一个 *库 crate*，库 crate 可以包含任意能被其他程序使用的代码，但不能独立执行。
@@ -266,6 +270,8 @@ $ cargo build
 ```
 
 这表明 Cargo 只因为你对 _src/main.rs_ 做了微小修改而更新了构建。依赖并没有变化，所以 Cargo 知道它可以复用之前已经下载并编译好的那些代码。
+
+<a id="ensuring-reproducible-builds-with-the-cargo-lock-file"></a>
 
 #### _Cargo.lock_ 文件确保可重现构建
 

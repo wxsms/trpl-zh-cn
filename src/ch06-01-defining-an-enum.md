@@ -114,6 +114,8 @@ enum IpAddr {
 
 让我们看看标准库中的另一个非常常见且实用的枚举：`Option`。
 
+<a id="the-option-enum-and-its-advantages-over-null-values"></a>
+
 ### `Option` 枚举
 
 这一部分会分析一个 `Option` 的案例，`Option` 是标准库定义的另一个枚举。`Option` 类型应用广泛因为它编码了一个非常普遍的场景，即一个值要么有值要么没值。

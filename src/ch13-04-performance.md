@@ -1,3 +1,5 @@
+<a id="comparing-performance-loops-vs-iterators"></a>
+
 ## 性能：循环 VS 迭代器
 
 [ch13-04-performance.md](https://github.com/rust-lang/book/blob/4b71f17f7daba738a1363862dacb818d9b12fb81/src/ch13-04-performance.md)
