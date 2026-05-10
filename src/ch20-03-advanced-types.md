@@ -136,7 +136,7 @@ Rust 需要知道应该为特定类型的值分配多少内存，同时所有同
 
 可以将 `str` 与各种指针类型组合使用：例如 `Box<str>` 或 `Rc<str>`。事实上，你以前已经见过这种做法，不过对象换成了另一种动态大小类型：trait。每个 trait 本身也是一种动态大小类型，我们可以通过 trait 的名字来引用它。在第十八章 [“使用 trait object 来抽象出共享行为”][using-trait-objects-to-abstract-over-shared-behavior] 一节中，我们提到过：为了把 trait 用作 trait 对象，必须把它放在某种指针之后，比如 `&dyn Trait` 或 `Box<dyn Trait>`（`Rc<dyn Trait>` 也可以）。
 
-为了处理 DST，Rust 提供了 `Sized` trait 来决定一个类型的大小是否在编译时可知。该 trait 会自动为所有在编译时大小已知的类型实现。此外，Rust 隐式地为每一个泛型函数增加了 `Sized` bound。也就是说，对于如下泛型函数定义：
+为了处理 DST，Rust 提供了 `Sized` trait 来决定一个类型的大小是否在编译时可知。该 trait 会自动为所有在编译时大小已知的类型实现。此外，Rust 隐式地为每一个泛型函数增加了 `Sized` 约束。也就是说，对于如下泛型函数定义：
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch20-advanced-features/no-listing-12-generic-fn-definition/src/lib.rs}}
@@ -154,7 +154,7 @@ Rust 需要知道应该为特定类型的值分配多少内存，同时所有同
 {{#rustdoc_include ../listings/ch20-advanced-features/no-listing-14-generic-maybe-sized/src/lib.rs}}
 ```
 
-`?Sized` 这个 trait bound 表示 “`T` 可以是 `Sized`，也可以不是 `Sized`” 同时这个注解会覆盖泛型类型必须在编译时拥有固定大小的默认规则。具有该含义的 `?Trait` 语法仅适用于 `Sized`，而不适用于其他任何 trait。
+`?Sized` 这个 trait 约束表示 “`T` 可以是 `Sized`，也可以不是 `Sized`” 同时这个注解会覆盖泛型类型必须在编译时拥有固定大小的默认规则。具有该含义的 `?Trait` 语法仅适用于 `Sized`，而不适用于其他任何 trait。
 
 另外注意我们将 `t` 参数的类型从 `T` 变为了 `&T`：因为其类型可能不是 `Sized` 的，所以需要将其置于某种指针之后。在这个例子中选择了引用。
 

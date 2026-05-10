@@ -46,7 +46,7 @@
 
 <span class="caption">示例 18-5：在 `Screen` 上实现一个 `run` 方法，该方法在每个 component 上调用 `draw` 方法</span>
 
-这与定义使用了带有 trait bound 的泛型类型参数的结构体不同。泛型类型参数一次只能替代一个具体类型，而 trait 对象则允许在运行时替代多种具体类型。例如，可以定义 `Screen` 结构体来使用泛型和 trait bound，如示例 18-6 所示：
+这与定义使用了带有 trait 约束的泛型类型参数的结构体不同。泛型类型参数一次只能替代一个具体类型，而 trait 对象则允许在运行时替代多种具体类型。例如，可以定义 `Screen` 结构体来使用泛型和 trait 约束，如示例 18-6 所示：
 
 <span class="filename">文件名：src/lib.rs</span>
 
@@ -54,9 +54,9 @@
 {{#rustdoc_include ../listings/ch18-oop/listing-18-06/src/lib.rs:here}}
 ```
 
-<span class="caption">示例 18-6: 一种 `Screen` 结构体的替代实现，其 `run` 方法使用泛型和 trait bound</span>
+<span class="caption">示例 18-6: 一种 `Screen` 结构体的替代实现，其 `run` 方法使用泛型和 trait 约束</span>
 
-这限制了 `Screen` 实例必须拥有一个全是 `Button` 类型或者全是 `TextField` 类型的组件列表。如果只需要同质（相同类型，homogeneous）集合，则倾向于使用泛型和 trait bound，因为其定义会在编译时采用具体类型进行单态化（monomorphized）。
+这限制了 `Screen` 实例必须拥有一个全是 `Button` 类型或者全是 `TextField` 类型的组件列表。如果只需要同质（相同类型，homogeneous）集合，则倾向于使用泛型和 trait 约束，因为其定义会在编译时采用具体类型进行单态化（monomorphized）。
 
 另一方面，通过使用 trait 对象的方法，一个 `Screen` 实例可以存放一个既能包含 `Box<Button>`，也能包含 `Box<TextField>` 的 `Vec<T>`。让我们看看它是如何工作的，接着会讲到其运行时性能影响。
 
@@ -120,7 +120,7 @@
 
 ### trait 对象执行动态分发
 
-回忆一下第十章 [“泛型代码的性能”][performance-of-code-using-generics] 部分讨论过的，当对泛型使用 trait bound 时编译器所执行的单态化处理：编译器为每一个被泛型类型参数代替的具体类型生成了函数和方法的非泛型实现。单态化产生的代码在执行**静态分发**（*static dispatch*），也就是说编译器在编译时就知晓要调用什么方法。这与**动态分发** （*dynamic dispatch*）相对，这时编译器在编译时无法知晓要调用哪个方法。在动态分发的场景下，编译器会生成负责在运行时确定该调用什么方法的代码。
+回忆一下第十章 [“泛型代码的性能”][performance-of-code-using-generics] 部分讨论过的，当对泛型使用 trait 约束时编译器所执行的单态化处理：编译器为每一个被泛型类型参数代替的具体类型生成了函数和方法的非泛型实现。单态化产生的代码在执行**静态分发**（*static dispatch*），也就是说编译器在编译时就知晓要调用什么方法。这与**动态分发** （*dynamic dispatch*）相对，这时编译器在编译时无法知晓要调用哪个方法。在动态分发的场景下，编译器会生成负责在运行时确定该调用什么方法的代码。
 
 当使用 trait 对象时，Rust 必须使用动态分发。编译器无法知晓所有可能用于 trait 对象代码的类型，所以它也不知道应该调用哪个类型的哪个方法实现。为此，Rust 在运行时使用 trait 对象中的指针来知晓需要调用哪个方法。这种查找会带来在静态分发中不会产生的运行时开销。动态分发也阻止编译器有选择地内联方法代码，这会相应地禁用一些优化，Rust 还定义了一些规则，称为**dyn 兼容性**（_dyn compatibility_），用于规定可以和不可以在哪些地方使用动态分发。这些规则超出了本讨论范围，但你可以在[参考资料][dyn-compatibility]中详细了解。尽管在编写示例 18-5 和可以支持示例 18-9 中的代码的过程中确实获得了额外的灵活性，但仍然需要权衡取舍。
 

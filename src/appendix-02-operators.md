@@ -2,7 +2,7 @@
 
 [appendix-02-operators.md](https://github.com/rust-lang/book/blob/799aa759e03d36dff11e920cf35ac38f496815ea/src/appendix-02-operators.md)
 
-该附录包含了 Rust 语法的词汇表，包括运算符以及其它符号，这些符号单独出现或出现在路径、泛型、trait bounds、宏、属性、注释、元组以及大括号上下文中。
+该附录包含了 Rust 语法的词汇表，包括运算符以及其它符号，这些符号单独出现或出现在路径、泛型、trait 约束、宏、属性、注释、元组以及大括号上下文中。
 
 ### 运算符
 
@@ -123,9 +123,9 @@
 | `for<...> type` | 高级生命周期限制 |
 | `type<ident=type>` | 泛型，其一个或多个相关类型必须被指定为特定类型（如 `Iterator<Item=T>`）|
 
-表 B-5 展示了出现在使用 trait bound 约束泛型参数上下文中的符号。
+表 B-5 展示了出现在使用 trait 约束泛型参数上下文中的符号。
 
-<span class="caption">表 B-5: Trait Bound 约束</span>
+<span class="caption">表 B-5: Trait 约束</span>
 
 | 符号 | 解释 |
 |--------|-------------|
