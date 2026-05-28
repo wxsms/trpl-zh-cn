@@ -91,7 +91,7 @@
 但是如果我们继续阅读错误，将会发现这个有帮助的信息：
 
 ```text
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:9:10}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:11:12}}
 ```
 
 让我们来试试！现在 `println!` 宏调用看起来会像 `println!("rect1 is {rect1:?}");`。在大括号中加入 `:?` 指示符，告诉 `println!` 我们想使用一种叫做 `Debug` 的输出格式。`Debug` 是一个 trait，它允许我们以一种对开发者有帮助的方式打印结构体，这样在调试代码时就能看到它的值。
@@ -105,7 +105,7 @@
 不过编译器又一次给出了一个有帮助的信息：
 
 ```text
-{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:9:10}}
+{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:12:13}}
 ```
 
 Rust **确实** 包含了打印出调试信息的功能，不过我们必须为结构体显式选择这个功能。为此，在结构体定义之前加上外部属性 `#[derive(Debug)]`，如示例 5-12 所示：
