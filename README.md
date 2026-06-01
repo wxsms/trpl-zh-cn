@@ -54,6 +54,20 @@ mdbook serve
 
 - 由 [mdbook-typst-pdf](https://github.com/KaiserY/mdbook-typst-pdf) 生成，有任何问题欢迎 issue 或 PR
 
+## EPUB
+
+你可以使用项目中提供的 Rust 构建工具将本书编译为 EPUB 电子书。
+
+在此之前，请确保您的系统已安装了 [Pandoc](https://pandoc.org/)。
+
+在项目根目录下，运行以下命令开始编译：
+
+```bash
+cargo run --release --manifest-path epub-builder/Cargo.toml
+```
+
+编译成功后，会在根目录下生成 `rust_programming_language.epub`。
+
 ## GitBook
 
 本翻译主要采用 [mdBook](https://github.com/rust-lang-nursery/mdBook) 格式。同时支持 [GitBook](https://github.com/GitbookIO/gitbook)，但会缺失部分功能，如一些代码没有语法高亮。
