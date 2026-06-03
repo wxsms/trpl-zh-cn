@@ -90,7 +90,7 @@ fn resolve_includes(content: &str, current_file_path: &Path) -> String {
         let included_abs_path = current_dir.join(&file_path_str);
         
         if !included_abs_path.exists() {
-            eprintln!("警告: 引入文件不存在 {:?} (在 {:?} 中引用)", included_abs_path, current_file_path);
+            eprintln!("警告：引入文件不存在 {:?} (在 {:?} 中引用)", included_abs_path, current_file_path);
             return format!("<!-- 缺失引入文件 {} -->", file_spec);
         }
         
@@ -183,7 +183,7 @@ fn main() {
     
     let summary_path = Path::new("src").join("SUMMARY.md");
     if !summary_path.exists() {
-        eprintln!("错误: 未找到 src/SUMMARY.md，请在项目根目录下运行此程序。");
+        eprintln!("错误：未找到 src/SUMMARY.md，请在项目根目录下运行此程序。");
         std::process::exit(1);
     }
     
@@ -218,11 +218,11 @@ fn main() {
     for file_path_str in &file_list {
         let full_path = Path::new("src").join(file_path_str);
         if !full_path.exists() {
-            eprintln!("警告: 文件 {:?} 不存在，已跳过。", full_path);
+            eprintln!("警告：文件 {:?} 不存在，已跳过。", full_path);
             continue;
         }
         
-        let content = std::fs::read_to_string(&full_path).unwrap_or_else(|_| panic!("读取文件失败: {:?}", full_path));
+        let content = std::fs::read_to_string(&full_path).unwrap_or_else(|_| panic!("读取文件失败：{:?}", full_path));
         let content_resolved = resolve_includes(&content, &full_path);
         
         let filename = Path::new(file_path_str).file_name().unwrap().to_string_lossy().into_owned();
@@ -312,7 +312,7 @@ fn main() {
     let output_epub = "rust_programming_language.epub";
     
     if let Err(e) = std::fs::write(temp_merged_path, merged_lines.join("")) {
-        eprintln!("写入临时文件失败: {}", e);
+        eprintln!("写入临时文件失败：{}", e);
         std::process::exit(1);
     }
     println!("已生成合并后的临时 Markdown 文件。");
@@ -338,13 +338,13 @@ fn main() {
             println!("恭喜！编译成功，生成文件：{}", output_epub);
         }
         Ok(s) => {
-            eprintln!("编译失败: pandoc 退出状态为 {}", s);
+            eprintln!("编译失败：pandoc 退出状态为 {}", s);
         }
         Err(e) => {
             if e.kind() == std::io::ErrorKind::NotFound {
-                eprintln!("错误: 系统未检测到 'pandoc' 命令，请确认 Pandoc 已正确安装并加入系统环境变量 PATH。");
+                eprintln!("错误：系统未检测到 'pandoc' 命令，请确认 Pandoc 已正确安装并加入系统环境变量 PATH。");
             } else {
-                eprintln!("编译失败: {}", e);
+                eprintln!("编译失败：{}", e);
             }
         }
     }
