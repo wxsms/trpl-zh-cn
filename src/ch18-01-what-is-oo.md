@@ -6,7 +6,7 @@
 
 ### 对象包含数据和行为
 
-由 Erich Gamma、Richard Helm、Ralph Johnson 和 John Vlissides（Addison-Wesley, 1994）编写的书 *Design Patterns: Elements of Reusable Object-Oriented Software* ，通称 *The Gang of Four*，是一本面向对象设计模式的目录。它这样定义面向对象编程：
+由 Erich Gamma、Richard Helm、Ralph Johnson 和 John Vlissides（Addison-Wesley, 1994）编写的书 *Design Patterns: Elements of Reusable Object-Oriented Software*，通称 *The Gang of Four*，是一本面向对象设计模式的目录。它这样定义面向对象编程：
 
 > Object-oriented programs are made up of objects. An *object* packages both
 > data and the procedures that operate on that data. The procedures are
