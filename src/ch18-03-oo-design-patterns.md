@@ -179,9 +179,9 @@
 
 状态模式的一个缺点是因为状态实现了状态之间的转换，一些状态会相互联系。如果在 `PendingReview` 和 `Published` 之间增加另一个状态，比如 `Scheduled`，则不得不修改 `PendingReview` 中的代码来转移到 `Scheduled`。如果 `PendingReview` 无需因为新增的状态而改变就更好了，不过这意味着切换到另一种设计模式。
 
-另一个缺点是我们会发现一些重复的逻辑。为了消除它们，可以尝试为 `State` trait 中返回 `self` 的 `request_review` 和 `approve` 方法增加默认实现；然而这样做行不通：当将 `State` 用作 trait 对象时，trait 并不知道 `self` 具体是什么类型，因此无法在编译时确定返回类型。（这是前面提到的 dyn 兼容性规则之一。）
+另一个缺点是我们会发现一些重复的逻辑。为了消除它们，可以尝试在 `State` trait 中为 `request_review` 和 `approve` 方法提供返回 `self` 的默认实现；然而这样做行不通：当将 `State` 用作 trait 对象时，trait 并不知道 `self` 具体是什么类型，因此无法在编译时确定返回类型。（这是前面提到的 dyn 兼容性规则之一。）
 
-另一个重复是 `Post` 中 `request_review` 和 `approve` 这两个类似的实现。它们都会对 `Post` 的 `state` 字段调用 `Option::take`，如果 `state` 为 `Some`，就将调用委托给封装值的同名方法，并将返回结果重新赋值给 `state` 字段。如果 `Post` 中的很多方法都遵循这个模式，我们可能会考虑定义一个宏来消除重复（查看第二十章的 [“宏”][macros] 部分）。
+其他的重复逻辑还包括 `Post` 中 `request_review` 和 `approve` 这两个类似的实现。它们都会对 `Post` 的 `state` 字段调用 `Option::take`，如果 `state` 为 `Some`，就将调用委托给封装值的同名方法，并将返回结果重新赋值给 `state` 字段。如果 `Post` 中的很多方法都遵循这个模式，我们可能会考虑定义一个宏来消除重复（查看第二十章的 [“宏”][macros] 部分）。
 
 完全按照面向对象语言的定义实现这个模式并没有尽可能地利用 Rust 的优势。让我们看看一些代码中可以做出的修改，来将无效的状态和状态转移变为编译时错误。
 
