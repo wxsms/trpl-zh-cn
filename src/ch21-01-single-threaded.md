@@ -110,7 +110,7 @@ Request: [
 
 ### 更仔细地观察 HTTP 请求
 
-HTTP 是一个基于文本的协议，同时一个请求有如下格式：
+HTTP 是一个基于文本的协议，请求的格式如下：
 
 ```text
 Method Request-URI HTTP-Version CRLF
